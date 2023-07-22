@@ -6,7 +6,7 @@ const search = document.getElementById('search');
 // Function to fetch movies using the provided search term (POST request)
 async function fetchMoviesBySearch(searchTerm) {
   try {
-    const response = await fetch('http://localhost:3000/movies', {
+    const response = await fetch('https://movies-api-y7sk.onrender.com/movies', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ async function showsearchmovies(data) {
 
 async function showmovies() {
   try {
-    const response = await fetch('http://localhost:3000/movies');
+    const response = await fetch('https://movies-api-y7sk.onrender.com/movies');
     const data = await response.json();
     // console.log(data)
 
