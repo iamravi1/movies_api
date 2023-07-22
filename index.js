@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 const port = 3000;
@@ -13,6 +14,8 @@ app.use(cors());
 
 // Middleware to parse JSON data from POST request body
 app.use(express.json());
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Function to fetch popular movies
 async function fetchMovies() {
