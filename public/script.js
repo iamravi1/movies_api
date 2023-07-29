@@ -6,7 +6,7 @@ const search = document.getElementById('search');
 // Function to fetch movies using the provided search term (POST request)
 async function fetchMoviesBySearch(searchTerm) {
   try {
-    const response = await fetch('https://movies-api-y7sk.onrender.com/movies', {
+    const response = await fetch('http://localhost:3000/movies', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -26,6 +26,10 @@ async function fetchMoviesBySearch(searchTerm) {
 async function showsearchmovies(data) {
   try {
     main.innerHTML = '';
+    if (!data || !Array.isArray(data)) {
+      showNoResultsMessage();
+      return;
+    }
     data.forEach(movie => {
       const { original_title, poster_path, vote_average, overview } = movie;
       const movieel = document.createElement('div');
@@ -51,10 +55,13 @@ async function showsearchmovies(data) {
   }
 }
 
+function showNoResultsMessage() {
+  main.innerHTML = '<h1>Your searched movie does not exist</h1>';
+}
 
 async function showmovies() {
   try {
-    const response = await fetch('https://movies-api-y7sk.onrender.com/movies');
+    const response = await fetch('http://localhost:3000/movies');
     const data = await response.json();
     // console.log(data)
 
@@ -103,6 +110,7 @@ function addMoviesButtonListener() {
   const moviesButton = document.getElementById('moviesButton');
   moviesButton.addEventListener('click', () => {
     // Call the function to fetch popular movies (GET request)
+    search.value = '';
     showmovies();
   });
 }
